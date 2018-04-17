@@ -39,7 +39,12 @@ public class GameContoller : MonoBehaviour
                 float space = .25f;
                 float enemySize = .5f;
                 Vector3 position = Vector3.right * (enemySize + space)*col + Vector3.down * (enemySize + space)*row;
-                var enemy = Instantiate(NormalEnemy, position, Quaternion.identity);
+                GameObject enemyToSpawn = NormalEnemy;
+                if((1 == row || 3 == row) && (0 == col || 5 == col))
+                {
+                    enemyToSpawn = ShootingEnemy;
+                }
+                var enemy = Instantiate(enemyToSpawn, position, Quaternion.identity);
                 enemy.transform.SetParent(EnemyGroupController.transform, false);
             }
         }
