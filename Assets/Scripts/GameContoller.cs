@@ -10,13 +10,19 @@ public class GameContoller : MonoBehaviour
     public Transform playerSpawnPos;
 
     public Text timerText;
+    private bool isGamePlaying = false;
+    private PlayerController playerController;
 
-	void Start ()
-	{
-	    Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity);
+    void Awake()
+    {
+        playerController = Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity).GetComponent<PlayerController>();
+        playerController.enabled = false;
+    }
 
-	    StartCoroutine(Countdown());
-	}
+    void Start ()
+    {
+        StartCoroutine(Countdown());
+    }
 
     IEnumerator Countdown()
     {
@@ -27,11 +33,21 @@ public class GameContoller : MonoBehaviour
             timerText.text = ((int)Mathf.Ceil(timeToStart)).ToString();
             yield return new WaitForEndOfFrame();
         }
+
         timerText.gameObject.SetActive(false);
+
+        StartGame();
         yield return null;
     }
 
-	// Update is called once per frame
+    private void StartGame()
+    {
+        isGamePlaying = true;
+        playerController.enabled = true;
+        //todo activate enemies and spawner
+    }
+
+    // Update is called once per frame
 	void Update () {
 		
 	}
