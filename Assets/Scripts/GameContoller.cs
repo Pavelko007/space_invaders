@@ -24,7 +24,9 @@ public class GameContoller : MonoBehaviour
 
     void Awake()
     {
+        
         Instance = this;
+        EnemyGroupController.enabled = false;
         playerController = Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity).GetComponent<PlayerController>();
         playerController.enabled = false;
         GameOverPanel.SetActive(false);
@@ -66,6 +68,7 @@ public class GameContoller : MonoBehaviour
 
     private void StartGame()
     {
+        EnemyGroupController.enabled = true;
         isGamePlaying = true;
         playerController.enabled = true;
         //todo activate enemies and spawner
