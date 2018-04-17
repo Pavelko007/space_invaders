@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4849352427675750}
   - component: {fileID: 114909587621812948}
+  - component: {fileID: 114959575354571660}
   - component: {fileID: 33218430725206852}
   - component: {fileID: 23689161237042322}
   - component: {fileID: 61107600578743752}
@@ -30,6 +31,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1664374968891854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4410080718994486}
+  m_Layer: 0
+  m_Name: ShotSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4410080718994486
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664374968891854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4849352427675750}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4849352427675750
 Transform:
   m_ObjectHideFlags: 1
@@ -37,9 +66,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1429493167098280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.64, y: -0.03, z: 0}
   m_LocalScale: {x: 1.56, y: 0.48, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4410080718994486}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,3 +150,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d44ef75b255822449a565fd0b4f627c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114959575354571660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429493167098280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2547501f2ea71b642849ff18fa420020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shot: {fileID: 1871198688773164, guid: 3a7bec4ff7ec53f40a16bf7a5a73ea7a, type: 2}
+  shotSpawn: {fileID: 4410080718994486}

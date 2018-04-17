@@ -6,7 +6,7 @@ public class MothershipController : MonoBehaviour
 {
     private Vector3 targetPos;
 
-    void Awake()
+    void Start()
     {
         GameContoller.Instance.NumMotherships++;
     }
