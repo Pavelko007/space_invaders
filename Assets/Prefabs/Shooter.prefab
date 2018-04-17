@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 23107788448223344}
   - component: {fileID: 61658110172689284}
   - component: {fileID: 50944353791739614}
+  - component: {fileID: 114129852741229870}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Enemy
@@ -173,6 +174,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreForKill: 2
+  floatingScore: {fileID: 0}
+--- !u!114 &114129852741229870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301665776536412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e910c17b00c3840b56662f435fd363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreForKill: 2
+  floatingScore: {fileID: 1635013568103038, guid: 4f00a6ae011c8ac479700d3e9ff4b2d6,
+    type: 2}
 --- !u!114 &114171202100228360
 MonoBehaviour:
   m_ObjectHideFlags: 1
