@@ -86,10 +86,11 @@ public class GameContoller : Singleton<GameContoller>
 
     private void CleanUp()
     {
-        while (EnemyGroupController.transform.childCount > 0)
-        {
-            Destroy(EnemyGroupController.transform.GetChild(0).gameObject);
-        }
+        if(playerController)Destroy(playerController.gameObject);
+        //while (EnemyGroupController.transform.childCount > 0)
+        //{
+        //    Destroy(EnemyGroupController.transform.GetChild(0).gameObject);
+        //}
     }
 
     private void SpawnPlayer()
@@ -214,7 +215,7 @@ public class GameContoller : Singleton<GameContoller>
 
     public void Restart()
     {
-        //CleanUp();
+        CleanUp();
         StartGame();
     }
 

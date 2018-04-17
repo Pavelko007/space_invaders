@@ -7,10 +7,6 @@ public class PlayerController : MonoBehaviour
     public GameObject shot;
     public Transform shotSpawn;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update ()
