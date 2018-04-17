@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,7 +14,7 @@ public class GameContoller : MonoBehaviour
     public Transform playerSpawnPos;
 
     public Text timerText;
-    private bool isGamePlaying = false;
+    public bool isGamePlaying = false;
     private PlayerController playerController;
     public static GameContoller Instance;
     public GameObject GameOverPanel;
@@ -42,8 +43,7 @@ public class GameContoller : MonoBehaviour
     {
         Instance = this;
         EnemyGroupController.enabled = false;
-        playerController = Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity).GetComponent<PlayerController>();
-        playerController.enabled = false;
+        SpawnPlayer();
         GameOverPanel.SetActive(false);
         EnemyGroupController.transform.position = EnemyGroupSpawn.position;
 
@@ -54,12 +54,17 @@ public class GameContoller : MonoBehaviour
                 float space = .25f;
                 float enemySize = .5f;
                 Vector3 position = Vector3.right * (enemySize + space)*col + Vector3.down * (enemySize + space)*row;
-                GameObject enemyToSpawn = NormalEnemy;
-                if((1 == row || 3 == row) && (0 == col || 5 == col))
+                GameObject enemy;
+                if ((1 == row || 3 == row) && (0 == col || 5 == col))
                 {
-                    enemyToSpawn = ShootingEnemy;
+                    enemy = Instantiate(ShootingEnemy, position, Quaternion.identity);
                 }
-                var enemy = Instantiate(enemyToSpawn, position, Quaternion.identity);
+                else
+                {
+                    enemy = Instantiate(NormalEnemy, position, Quaternion.identity);
+                }
+                
+                
                 enemy.transform.SetParent(EnemyGroupController.transform, false);
             }
         }
@@ -70,8 +75,16 @@ public class GameContoller : MonoBehaviour
         StartCoroutine(Countdown());
     }
 
+    private void SpawnPlayer()
+    {
+        playerController = Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity)
+            .GetComponent<PlayerController>();
+        playerController.enabled = false;
+    }
+
     IEnumerator Countdown()
     {
+        timerText.gameObject.SetActive(true);
         float timeToStart = 3;
         while (timeToStart > 0)
         {
@@ -92,13 +105,29 @@ public class GameContoller : MonoBehaviour
         isGamePlaying = true;
         playerController.enabled = true;
         InvokeRepeating("SpawnMothership", 0, 4);
+        onGameResume.Invoke();
         //todo activate enemies and spawner
+    }
+
+    public UnityEvent onGamePause;
+    public UnityEvent onGameResume;
+
+    public void OnPlayerHit()
+    {
+        onGamePause.Invoke();
+        isGamePlaying = false;
+        EnemyGroupController.enabled = false;
+        SpawnPlayer();
+        CancelInvoke("SpawnMothership");
+        StartCoroutine(Countdown());
     }
 
     public GameObject Mothership;
 
     public Transform MothershipSpawnLeft;
+
     public Transform MothershipSpawnRight;
+
     private float score = 0;
 
     void SpawnMothership()
@@ -123,7 +152,9 @@ public class GameContoller : MonoBehaviour
 
         }
     }
+
     // Update is called once per frame
+
 
     void Update () {
 	    if (Input.GetKeyDown(KeyCode.P))
@@ -173,6 +204,7 @@ public class GameContoller : MonoBehaviour
     }
 
     public Text ScoreText;
+
     private int numEnemies;
 
     public float Score

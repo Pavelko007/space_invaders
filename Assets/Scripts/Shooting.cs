@@ -10,7 +10,15 @@ public class Shooting : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating("Shoot", 0, 2);
+		
+        GameContoller.Instance.onGamePause.AddListener(() =>
+        {
+            CancelInvoke("Shoot");
+        });
+        GameContoller.Instance.onGameResume.AddListener(() =>
+        {
+            InvokeRepeating("Shoot", 0, 2);
+        });
 	}
 	
 	// Update is called once per frame

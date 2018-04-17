@@ -14,7 +14,10 @@ public class MothershipController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (!GameContoller.Instance.isGamePlaying) return;
+
 	    transform.position = Vector3.MoveTowards(transform.position, targetPos, 2 * Time.deltaTime);
+
 	    if (transform.position == targetPos)
 	    {
 	        Destroy(gameObject);

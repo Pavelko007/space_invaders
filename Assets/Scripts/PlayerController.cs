@@ -43,9 +43,19 @@ public class PlayerController : MonoBehaviour
         {
             OnEnemyContact();
         }
-         
+
+        if (other.gameObject.CompareTag("EnemyShot"))
+        {
+            OnPlayerHit();
+        }
     }
-  
+
+    private void OnPlayerHit()
+    {
+        Destroy(gameObject);
+        GameContoller.Instance.OnPlayerHit();
+    }
+
     private void OnEnemyContact()
     {
         Destroy(gameObject);
