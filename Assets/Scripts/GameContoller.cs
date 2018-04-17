@@ -57,8 +57,6 @@ public class GameContoller : Singleton<GameContoller>
         GameOverPanel.SetActive(false);
         EnemyGroupController.transform.position = EnemyGroupSpawn.position;
 
-       
-
         //if(EnemyGroupController)
         for (int row = 0; row < 6; row++)
         {
@@ -86,7 +84,15 @@ public class GameContoller : Singleton<GameContoller>
 
     private void CleanUp()
     {
+        onGameRestarted.Invoke();
+        score = 0;
+
         if(playerController)Destroy(playerController.gameObject);
+
+        foreach (Transform child in EnemyGroupController.transform)
+        {
+            Destroy(child.gameObject);
+        }
         //while (EnemyGroupController.transform.childCount > 0)
         //{
         //    Destroy(EnemyGroupController.transform.GetChild(0).gameObject);
@@ -129,6 +135,7 @@ public class GameContoller : Singleton<GameContoller>
 
     public UnityEvent onGamePause;
     public UnityEvent onGameResume;
+    public UnityEvent onGameRestarted;
 
     private void PauseGame()
     {

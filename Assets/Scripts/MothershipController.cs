@@ -8,6 +8,7 @@ public class MothershipController : MonoBehaviour
 
     void Start()
     {
+        GameContoller.Instance.onGameRestarted.AddListener(()=>{Destroy(gameObject);});
         GameContoller.Instance.NumEnemies++;
     }
 	
