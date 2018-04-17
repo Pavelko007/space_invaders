@@ -25,6 +25,8 @@ public class GameContoller : Singleton<GameContoller>
     public GameObject NormalEnemy;
     public GameObject ShootingEnemy;
     public EnemyGroupController EnemyGroupController;
+    private int numLives = 3;
+    public Text LivesText;
 
     public int NumEnemies
     {
@@ -52,6 +54,7 @@ public class GameContoller : Singleton<GameContoller>
 
     private void StartGame()
     {
+        UpdateLivesText();
         EnemyGroupController.enabled = false;
         SpawnPlayer();
         GameOverPanel.SetActive(false);
@@ -84,6 +87,8 @@ public class GameContoller : Singleton<GameContoller>
 
     private void CleanUp()
     {
+        NumLives = 3;
+
         onGameRestarted.Invoke();
         score = 0;
 
@@ -149,9 +154,17 @@ public class GameContoller : Singleton<GameContoller>
 
     public void OnPlayerHit()
     {
+        NumLives--;
+        UpdateLivesText();
+
         PauseGame();
         SpawnPlayer();
         StartCoroutine(Countdown());
+    }
+
+    private void UpdateLivesText()
+    {
+        LivesText.text = string.Format("{0} lives left", NumLives);
     }
 
     public GameObject Mothership;
@@ -248,6 +261,20 @@ public class GameContoller : Singleton<GameContoller>
             score = value;
             ScoreText.text = string.Format("Score: {0}", score);
             Debug.Log("score is " + score);
+        }
+    }
+
+    public int NumLives
+    {
+        get { return numLives; }
+        set
+        {
+
+            numLives = value;
+            if (numLives == 0)
+            {
+                GameOver(false);
+            }
         }
     }
 }
