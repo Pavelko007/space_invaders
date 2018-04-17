@@ -1,0 +1,8 @@
+I have problem reloading the level. First I just reloaded the scene, but I get error in Singeleton due to destroyed objects, so I desided it is better to make a cleanup of the existing scene.
+I would epose hardcoded paremeters for tweeking.
+I would use object pool for instantiated objects. 
+I would fix the player bouncing of the walls. 
+I would refactor GameController into multiple classes.
+I would adapt the game different aspect ratios.
+I would use a event system.
+I would not load menu scene every time I go to the menu.
