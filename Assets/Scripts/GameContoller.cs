@@ -22,10 +22,15 @@ public class GameContoller : Singleton<GameContoller>
     public Text GameOverText;
 
     public Transform EnemyGroupSpawn;
+
     public GameObject NormalEnemy;
+
     public GameObject ShootingEnemy;
+
     public EnemyGroupController EnemyGroupController;
+
     private int numLives = 3;
+
     public Text LivesText;
 
     public int NumEnemies
@@ -38,6 +43,35 @@ public class GameContoller : Singleton<GameContoller>
             if (numEnemies == 0)
             {
                 GameOver(true);
+            }
+        }
+    }
+
+    public Text ScoreText;
+
+    private int numEnemies;
+
+    public float Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            ScoreText.text = string.Format("Score: {0}", score);
+            Debug.Log("score is " + score);
+        }
+    }
+
+    public int NumLives
+    {
+        get { return numLives; }
+        set
+        {
+
+            numLives = value;
+            if (numLives == 0)
+            {
+                GameOver(false);
             }
         }
     }
@@ -90,7 +124,7 @@ public class GameContoller : Singleton<GameContoller>
         NumLives = 3;
 
         onGameRestarted.Invoke();
-        score = 0;
+        Score = 0;
 
         if(playerController)Destroy(playerController.gameObject);
 
@@ -139,8 +173,11 @@ public class GameContoller : Singleton<GameContoller>
     }
 
     public UnityEvent onGamePause;
+
     public UnityEvent onGameResume;
+
     public UnityEvent onGameRestarted;
+
 
     private void PauseGame()
     {
@@ -169,11 +206,15 @@ public class GameContoller : Singleton<GameContoller>
 
     public GameObject Mothership;
 
+
     public Transform MothershipSpawnLeft;
+
 
     public Transform MothershipSpawnRight;
 
+
     private float score = 0;
+
 
     void SpawnMothership()
     {
@@ -247,34 +288,5 @@ public class GameContoller : Singleton<GameContoller>
     public void AddScore(float scoreForKill)
     {
         Score += scoreForKill;
-    }
-
-    public Text ScoreText;
-
-    private int numEnemies;
-
-    public float Score
-    {
-        get { return score; }
-        set
-        {
-            score = value;
-            ScoreText.text = string.Format("Score: {0}", score);
-            Debug.Log("score is " + score);
-        }
-    }
-
-    public int NumLives
-    {
-        get { return numLives; }
-        set
-        {
-
-            numLives = value;
-            if (numLives == 0)
-            {
-                GameOver(false);
-            }
-        }
     }
 }

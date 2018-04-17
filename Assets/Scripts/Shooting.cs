@@ -18,10 +18,7 @@ public class Shooting : MonoBehaviour
         {
             CancelInvoke("Shoot");
         });
-        GameContoller.Instance.onGameResume.AddListener(() =>
-        {
-            StartShooting();
-        });
+        GameContoller.Instance.onGameResume.AddListener(StartShooting);
 	}
 
     private void StartShooting()

@@ -174,7 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreForKill: 2
-  floatingScore: {fileID: 0}
+  floatingScore: {fileID: 1635013568103038, guid: 4f00a6ae011c8ac479700d3e9ff4b2d6,
+    type: 2}
 --- !u!114 &114129852741229870
 MonoBehaviour:
   m_ObjectHideFlags: 1
