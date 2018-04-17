@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class GameContoller : MonoBehaviour
+public class GameContoller : Singleton<GameContoller>
 {
+    protected GameContoller(){}
+
     public GameObject playerPrefab;
 
     public Transform playerSpawnPos;
@@ -16,7 +18,6 @@ public class GameContoller : MonoBehaviour
     public Text timerText;
     public bool isGamePlaying = false;
     private PlayerController playerController;
-    public static GameContoller Instance;
     public GameObject GameOverPanel;
     public Text GameOverText;
 
@@ -41,19 +42,31 @@ public class GameContoller : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        
+    }
+
+    void Start ()
+    {
+        StartGame();
+    }
+
+    private void StartGame()
+    {
         EnemyGroupController.enabled = false;
         SpawnPlayer();
         GameOverPanel.SetActive(false);
         EnemyGroupController.transform.position = EnemyGroupSpawn.position;
 
+       
+
+        if(EnemyGroupController)
         for (int row = 0; row < 6; row++)
         {
             for (int col = 0; col < 6; col++)
             {
                 float space = .25f;
                 float enemySize = .5f;
-                Vector3 position = Vector3.right * (enemySize + space)*col + Vector3.down * (enemySize + space)*row;
+                Vector3 position = Vector3.right * (enemySize + space) * col + Vector3.down * (enemySize + space) * row;
                 GameObject enemy;
                 if ((1 == row || 3 == row) && (0 == col || 5 == col))
                 {
@@ -63,16 +76,22 @@ public class GameContoller : MonoBehaviour
                 {
                     enemy = Instantiate(NormalEnemy, position, Quaternion.identity);
                 }
-                
-                
+
+
                 enemy.transform.SetParent(EnemyGroupController.transform, false);
             }
         }
+        StartCoroutine(Countdown());
     }
 
-    void Start ()
+    private void CleanUp()
     {
-        StartCoroutine(Countdown());
+        while (EnemyGroupController.transform.childCount > 0)
+        {
+        }
+        {
+            Destroy(EnemyGroupController.transform.GetChild(0));
+        }
     }
 
     private void SpawnPlayer()
@@ -95,11 +114,11 @@ public class GameContoller : MonoBehaviour
 
         timerText.gameObject.SetActive(false);
 
-        StartGame();
+        ResumeGame();
         yield return null;
     }
 
-    private void StartGame()
+    private void ResumeGame()
     {
         EnemyGroupController.enabled = true;
         isGamePlaying = true;
@@ -112,13 +131,20 @@ public class GameContoller : MonoBehaviour
     public UnityEvent onGamePause;
     public UnityEvent onGameResume;
 
-    public void OnPlayerHit()
+    private void PauseGame()
     {
+        onGamePause.Invoke();
+        playerController.enabled = false;
         onGamePause.Invoke();
         isGamePlaying = false;
         EnemyGroupController.enabled = false;
-        SpawnPlayer();
         CancelInvoke("SpawnMothership");
+    }
+
+    public void OnPlayerHit()
+    {
+        PauseGame();
+        SpawnPlayer();
         StartCoroutine(Countdown());
     }
 
@@ -184,13 +210,14 @@ public class GameContoller : MonoBehaviour
         {
             GameOverText.text = "You lost";
         }
-        
-        isGamePlaying = false;
+
+        PauseGame();
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CleanUp();
+        StartGame();
     }
 
     public void GoToMainMenu()
