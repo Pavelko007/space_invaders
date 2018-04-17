@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    public GameObject shot;
+    public Transform shotSpawn;
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +15,11 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (Input.GetKeyDown(KeyCode.Space))
+	    {
+	        Instantiate(shot, shotSpawn.position, Quaternion.identity);
+	    }
+
 	    var hor = Input.GetAxis("Horizontal");
 	    if (hor != 0)
 	    {
@@ -28,4 +36,6 @@ public class PlayerController : MonoBehaviour {
             transform.Translate(dir*10*Time.deltaTime);
 	    }
 	}
+
+
 }
