@@ -43,8 +43,9 @@ public class PlayerController : MonoBehaviour
         {
             OnEnemyContact();
         }
+         
     }
-
+  
     private void OnEnemyContact()
     {
         Destroy(gameObject);
