@@ -15,6 +15,12 @@ public class GameContoller : MonoBehaviour
     private PlayerController playerController;
     public static GameContoller Instance;
     public GameObject GameOverPanel;
+    public Text GameOverText;
+
+    public Transform EnemyGroupSpawn;
+    public GameObject NormalEnemy;
+    public GameObject ShootingEnemy;
+    public EnemyGroupController EnemyGroupController;
 
     void Awake()
     {
@@ -22,9 +28,20 @@ public class GameContoller : MonoBehaviour
         playerController = Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity).GetComponent<PlayerController>();
         playerController.enabled = false;
         GameOverPanel.SetActive(false);
-    }
+        EnemyGroupController.transform.position = EnemyGroupSpawn.position;
 
-    public Text GameOverText;
+        for (int row = 0; row < 6; row++)
+        {
+            for (int col = 0; col < 6; col++)
+            {
+                float space = .25f;
+                float enemySize = .5f;
+                Vector3 position = Vector3.right * (enemySize + space)*col + Vector3.down * (enemySize + space)*row;
+                var enemy = Instantiate(NormalEnemy, position, Quaternion.identity);
+                enemy.transform.SetParent(EnemyGroupController.transform, false);
+            }
+        }
+    }
 
     void Start ()
     {
