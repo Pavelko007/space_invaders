@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameContoller : MonoBehaviour
 {
@@ -75,18 +77,35 @@ public class GameContoller : MonoBehaviour
         EnemyGroupController.enabled = true;
         isGamePlaying = true;
         playerController.enabled = true;
-        InvokeRepeating("SpawnMothership",0,4);
+        InvokeRepeating("SpawnMothership", 0, 4);
         //todo activate enemies and spawner
     }
 
     public GameObject Mothership;
-    public Transform MothershipLeftSpawn;
+
+    public Transform MothershipSpawnLeft;
+    public Transform MothershipSpawnRight;
 
     void SpawnMothership()
     {
         if (Random.value < .4f)
         {
-            
+            Vector3 startPos;
+            Vector3 targetPos;
+            if (Random.value < 0.5f)
+            {
+                startPos = MothershipSpawnLeft.position;
+                targetPos = MothershipSpawnRight.position;
+            }
+            else
+            {
+                startPos = MothershipSpawnRight.position;
+                targetPos = MothershipSpawnLeft.position;
+            }
+
+            var mothership = Instantiate(Mothership, startPos, Quaternion.identity).GetComponent<MothershipController>();
+            mothership.SetTarget(targetPos);
+
         }
     }
     // Update is called once per frame
