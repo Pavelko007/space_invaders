@@ -86,6 +86,7 @@ public class GameContoller : MonoBehaviour
 
     public Transform MothershipSpawnLeft;
     public Transform MothershipSpawnRight;
+    private float score = 0;
 
     void SpawnMothership()
     {
@@ -151,5 +152,20 @@ public class GameContoller : MonoBehaviour
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("menu");
+    }
+
+    public void AddScore(float scoreForKill)
+    {
+        Score += scoreForKill;
+    }
+
+    public float Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            Debug.Log("score is " + score);
+        }
     }
 }

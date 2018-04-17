@@ -23,6 +23,10 @@ public class ShotController : MonoBehaviour {
     {
         if (other.CompareTag(KillableTag))
         {
+            if (KillableTag != "Player")
+            {
+                other.gameObject.GetComponent<ScoreUpdater>().UpdateScore();
+            }
             Destroy(gameObject);
             Destroy(other.gameObject);
         }
