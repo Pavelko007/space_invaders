@@ -59,7 +59,7 @@ public class GameContoller : Singleton<GameContoller>
 
        
 
-        if(EnemyGroupController)
+        //if(EnemyGroupController)
         for (int row = 0; row < 6; row++)
         {
             for (int col = 0; col < 6; col++)
@@ -88,9 +88,7 @@ public class GameContoller : Singleton<GameContoller>
     {
         while (EnemyGroupController.transform.childCount > 0)
         {
-        }
-        {
-            Destroy(EnemyGroupController.transform.GetChild(0));
+            Destroy(EnemyGroupController.transform.GetChild(0).gameObject);
         }
     }
 
@@ -216,7 +214,7 @@ public class GameContoller : Singleton<GameContoller>
 
     public void Restart()
     {
-        CleanUp();
+        //CleanUp();
         StartGame();
     }
 
