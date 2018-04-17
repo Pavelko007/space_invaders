@@ -159,12 +159,15 @@ public class GameContoller : MonoBehaviour
         Score += scoreForKill;
     }
 
+    public Text ScoreText;
+
     public float Score
     {
         get { return score; }
         set
         {
             score = value;
+            ScoreText.text = string.Format("Score: {0}", score);
             Debug.Log("score is " + score);
         }
     }
