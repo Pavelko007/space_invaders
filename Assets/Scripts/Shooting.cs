@@ -10,18 +10,26 @@ public class Shooting : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		
+	    if (GameContoller.Instance.isGamePlaying)
+	    {
+	        StartShooting();
+	    }
         GameContoller.Instance.onGamePause.AddListener(() =>
         {
             CancelInvoke("Shoot");
         });
         GameContoller.Instance.onGameResume.AddListener(() =>
         {
-            InvokeRepeating("Shoot", 0, 2);
+            StartShooting();
         });
 	}
-	
-	// Update is called once per frame
+
+    private void StartShooting()
+    {
+        InvokeRepeating("Shoot", 0, 2);
+    }
+
+    // Update is called once per frame
 	void Shoot()
     {
         Instantiate(shot, shotSpawn.position, Quaternion.identity);
