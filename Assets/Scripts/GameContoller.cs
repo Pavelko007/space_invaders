@@ -24,7 +24,6 @@ public class GameContoller : MonoBehaviour
 
     void Awake()
     {
-        
         Instance = this;
         EnemyGroupController.enabled = false;
         playerController = Instantiate(playerPrefab, playerSpawnPos.position, Quaternion.identity).GetComponent<PlayerController>();
@@ -76,9 +75,20 @@ public class GameContoller : MonoBehaviour
         EnemyGroupController.enabled = true;
         isGamePlaying = true;
         playerController.enabled = true;
+        InvokeRepeating("SpawnMothership",0,4);
         //todo activate enemies and spawner
     }
 
+    public GameObject Mothership;
+    public Transform MothershipLeftSpawn;
+
+    void SpawnMothership()
+    {
+        if (Random.value < .4f)
+        {
+            
+        }
+    }
     // Update is called once per frame
 
     void Update () {
