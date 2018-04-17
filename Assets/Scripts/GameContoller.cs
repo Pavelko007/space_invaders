@@ -73,7 +73,7 @@ public class GameContoller : MonoBehaviour
         }
     }
 
-    private void GameOver(bool hasWon = false)
+    public void GameOver(bool hasWon = false)
     {
         GameOverPanel.SetActive(true);
         if (hasWon)
