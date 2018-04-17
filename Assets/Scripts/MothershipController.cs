@@ -8,7 +8,7 @@ public class MothershipController : MonoBehaviour
 
     void Start()
     {
-        GameContoller.Instance.NumMotherships++;
+        GameContoller.Instance.NumEnemies++;
     }
 	
 	// Update is called once per frame
@@ -19,11 +19,16 @@ public class MothershipController : MonoBehaviour
 	    {
 	        Destroy(gameObject);
 	    }
-	}
+
+	    if (Input.GetKeyDown(KeyCode.K))
+	    {
+	        Destroy(gameObject);
+	    }
+    }
 
     void OnDestroy()
     {
-        GameContoller.Instance.NumMotherships--;
+        GameContoller.Instance.NumEnemies--;
     }
 
     public void SetTarget(Vector3 targetPos)

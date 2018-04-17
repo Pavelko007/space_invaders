@@ -23,7 +23,20 @@ public class GameContoller : MonoBehaviour
     public GameObject NormalEnemy;
     public GameObject ShootingEnemy;
     public EnemyGroupController EnemyGroupController;
-    public int NumMotherships { get; set; }
+
+    public int NumEnemies
+    {
+        get { return numEnemies; }
+        set
+        {
+            numEnemies = value;
+
+            if (numEnemies == 0)
+            {
+                GameOver(true);
+            }
+        }
+    }
 
     void Awake()
     {
@@ -113,7 +126,7 @@ public class GameContoller : MonoBehaviour
     // Update is called once per frame
 
     void Update () {
-	    if (Input.GetKeyDown(KeyCode.K))
+	    if (Input.GetKeyDown(KeyCode.P))
 	    {
 	        Destroy(playerController.gameObject);
             GameOver(false);
@@ -160,6 +173,7 @@ public class GameContoller : MonoBehaviour
     }
 
     public Text ScoreText;
+    private int numEnemies;
 
     public float Score
     {
