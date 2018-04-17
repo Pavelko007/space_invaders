@@ -194,39 +194,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 61862383451024122, guid: ef5fc22cd8b6eba409dce156fb91680a,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef5fc22cd8b6eba409dce156fb91680a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &523700199 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1687146748375598, guid: ef5fc22cd8b6eba409dce156fb91680a,
-    type: 2}
-  m_PrefabInternal: {fileID: 163709399}
---- !u!50 &523700205
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 523700199}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &913194518
 Prefab:
   m_ObjectHideFlags: 0
@@ -265,10 +235,6 @@ Prefab:
     - target: {fileID: 4292137309609528, guid: c8dd7219aa89d654da3851d1d35214e8, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1845738722248666, guid: c8dd7219aa89d654da3851d1d35214e8, type: 2}
-      propertyPath: m_TagString
-      value: PlayerShot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8dd7219aa89d654da3851d1d35214e8, type: 2}
