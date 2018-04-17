@@ -23,6 +23,7 @@ public class GameContoller : MonoBehaviour
     public GameObject NormalEnemy;
     public GameObject ShootingEnemy;
     public EnemyGroupController EnemyGroupController;
+    public int NumMotherships { get; set; }
 
     void Awake()
     {

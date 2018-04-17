@@ -6,16 +6,25 @@ public class MothershipController : MonoBehaviour
 {
     private Vector3 targetPos;
 
-    // Use this for initialization
-	void Start () {
-		
-	}
+    void Awake()
+    {
+        GameContoller.Instance.NumMotherships++;
+    }
 	
 	// Update is called once per frame
 	void Update ()
 	{
-	    transform.position = Vector3.MoveTowards(transform.position, targetPos, 4 * Time.deltaTime);
+	    transform.position = Vector3.MoveTowards(transform.position, targetPos, 2 * Time.deltaTime);
+	    if (transform.position == targetPos)
+	    {
+	        Destroy(gameObject);
+	    }
 	}
+
+    void OnDestroy()
+    {
+        GameContoller.Instance.NumMotherships--;
+    }
 
     public void SetTarget(Vector3 targetPos)
     {
